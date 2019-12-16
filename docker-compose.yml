@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: "3"
+services:
+  app:
+    container_name: VUTTR_app
+    image: dinaerteneto/nodejs-image-challenge
+    build: .
+    volumes:
+      - ./app:/home/node/app
+    command: yarn start
+    depends_on:
+      - postgres
+    ports:
+      - 3000:3000
+    environment: 
+      NODE_ENV: development
+      DATABASE_URL: postgres://docker@postgres/vuttr
+    
+  postgres:
+    build:
+      context: ./Docker
+      dockerfile: db.Dockerfile    
+    container_name: VUTTR_postgres
+    image: postgres:alpine   
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: vuttr
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    ports:
+        - 5432:5432
