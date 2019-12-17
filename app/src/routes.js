@@ -6,42 +6,69 @@ const ToolController = require("./app/controllers/ToolController");
  * @swagger
  * /tools:
  *  post:
- *    description: Usado para adicionar ferramenta
- *    parameters: 
- *       - name: title
- *         in: query
- *         description: nome da ferramenta
- *         required: true
+ *    description: adiciona ferramenta
+ *    consumes: 
+ *       - application/json
+ *    parameters:
+ *       - in: body
+ *         name: tool
+ *         description: Adiona ferramenta e suas tags.
  *         schema:
- *           type: string
- *           format: string
- *       - name: link
- *         in: query
- *         description: link do repositório
- *         required: true
- *         schema:
- *           type: string
- *           format: string
- *       - name: description
- *         in: query
- *         description: descrição da ferramenta
- *         required: false
- *         schema:
- *           type: string
- *           format: string
- *       - name: tags
- *         in: query
- *         description: conjunto de palavras que lembram esta ferramenta
- *         required: false
- *         schema:
- *           type: array
- *           format: string
+ *           type: object
+ *           properties:
+ *              title:
+ *                type: string
+ *                required: true
+ *              link:
+ *                type: string
+ *                required: true
+ *              description:
+ *                type: string
+ *              tags:
+ *                type: array
+ *                example: ['tag1', 'tag2', 'tag3']
  *    responses:
  *      '201':
- *        description: A successful response
+ *        description: Criado
  */
 routes.post('/tools', ToolController.create);
+
+/**
+ * @swagger
+ * /tools:
+ *  get:
+ *    description: Usado para listar todas as ferramentas
+ *    parameters: 
+ *       - name: tag
+ *         in: query
+ *         description: nome da tag 
+ *         required: false
+ *         schema:
+ *           type: string
+ *           format: string
+ *    responses:
+ *      '200':
+ *        description: mostrar em formato json
+ */
 routes.get('/tools', ToolController.all);
+
+/**
+ * @swagger
+ * /tools/{id}:
+ *  delete:
+ *    description: Usado para excluir um registro da tabela, baseado em seu id
+ *    parameters: 
+ *       - name: id
+ *         in: path
+ *         description: id do registro que deseja excluir
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           format: int
+ *    responses:
+ *      '200':
+ *        description: Sucesso na requisição.
+ */
 routes.delete('/tools/:id', ToolController.delete);
 
 
