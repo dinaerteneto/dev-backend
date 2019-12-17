@@ -13,39 +13,46 @@ class ToolController {
         Tag.findOrCreate({ where: { name: tag } })
       );
 
-      Promise.all(tagsPromisse).then(dbRooms => {
-        dbRooms.map( rec => newTags.push(rec[0].get('id')) );
+      Promise.all(tagsPromisse).then(records => {
+        records.map(rec => newTags.push(rec[0].get("id")));
         tool.setTags(newTags);
       });
-
     }
     if (!tool) {
       return res
         .status(500)
         .json({ message: "Error trying to include registry." });
-    } 
+    }
 
     return res.status(201).json({ tool, tags });
   }
 
   async all(req, res) {
-    const tag = req.query.tag !== undefined ? req.query.tag : '';
-    const tools = await Tool.findAll({
+    let ret = [];
+    const tag = req.query.tag !== undefined ? req.query.tag : "";
+    await Tool.findAll({
       include: [
         {
           model: Tag,
-          as: 'tags',
+          as: "tags",
           through: { attributes: [] },
           where: {
             name: {
               [Op.like]: `%${tag}%`
             }
-          }
+          },
+          attributes: ["name"]
         }
       ]
-    });
-
-    return res.json({ tools });
+    }).then(tools =>
+      tools.map((tool, key) => {
+        const { tags } = tool;
+        ret[key] = tool.dataValues;
+        ret[key]["tags"] = [];
+        tags.map(tag => ret[key]["tags"].push(tag.name));
+      })
+    );
+    return res.json(ret);
   }
 
   async delete(req, res) {

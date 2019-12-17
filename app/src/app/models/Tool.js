@@ -9,8 +9,13 @@ module.exports = (sequelize, DataTypes) => {
 
     {
       schema: "public",
-      tableName: "tool"
-    }
+      tableName: "tool",
+      defaultScope: {
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      }
+    },
+
+    
   );
 
   Tool.associate = models => {
