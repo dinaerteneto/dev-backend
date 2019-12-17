@@ -29,7 +29,7 @@ const ToolController = require("./app/controllers/ToolController");
  *                example: ['tag1', 'tag2', 'tag3']
  *    responses:
  *      '201':
- *        description: Criado
+ *        description: Created
  */
 routes.post('/tools', ToolController.create);
 
@@ -48,7 +48,36 @@ routes.post('/tools', ToolController.create);
  *           format: string
  *    responses:
  *      '200':
- *        description: mostrar em formato json
+ *        description: array de objetos de tool
+ *        schema:
+ *          type: array
+ *          example: [
+ *              {
+ *                 id: 1,
+ *                 title: "Notion",
+ *                 link: "https://notion.so",
+ *                 description: "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+ *                 tags: [
+ *                    "organization",
+ *                    "planning",
+ *                    "collaboration"
+ *                 ]
+ *              },
+ *              {
+ *                 id: 2,
+ *                 title: "json-server",
+ *                 link: "https://github.com/typicode/json-server",
+ *                 description: "Fake REST API based on a json schema.",
+ *                 tags: [
+ *                     "api",
+ *                     "json",
+ *                     "schema",
+ *                     "node"
+ *                 ]
+ *             }
+ *        ]
+ *              
+ *        
  */
 routes.get('/tools', ToolController.all);
 
@@ -66,8 +95,8 @@ routes.get('/tools', ToolController.all);
  *           type: integer
  *           format: int
  *    responses:
- *      '200':
- *        description: Sucesso na requisição.
+ *      '204':
+ *        description: No content.
  */
 routes.delete('/tools/:id', ToolController.delete);
 

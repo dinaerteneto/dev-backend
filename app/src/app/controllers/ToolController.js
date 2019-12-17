@@ -104,7 +104,9 @@ class ToolController {
         .json({ message: "Error trying to delete record." });
     }
 
-    return res.json();
+    return res
+      .status(204)
+      .json();
   }
 }
 
