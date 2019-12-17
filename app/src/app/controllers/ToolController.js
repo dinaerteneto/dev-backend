@@ -28,36 +28,47 @@ class ToolController {
   }
 
   async all(req, res) {
-    let ret = [];
-    const tag = req.query.tag !== undefined ? req.query.tag : "";
-    await Tool.findAll({
-      include: [
-        {
-          model: Tag,
-          as: "tags",
-          through: { attributes: [] },
-          where: {
-            name: {
-              [Op.like]: `%${tag}%`
-            }
-          },
-          attributes: ["name"]
-        }
-      ]
-    }).then(tools =>
-      tools.map((tool, key) => {
+    try{
+      
+      const tag = req.query.tag !== undefined ? req.query.tag : "";
+      const tools = await Tool.findAll({
+        include: [
+          {
+            model: Tag,
+            as: "tags",
+            through: { attributes: [] },
+            where: {
+              name: {
+                [Op.like]: `%${tag}%`
+              },
+            },
+            required:false,
+            attributes: ["name"]
+          }
+        ]
+      });
+
+      const ret = [];
+      tools.forEach((tool) => {
         const { tags } = tool;
-        ret[key] = tool.dataValues;
-        ret[key]["tags"] = [];
-        tags.map(tag => ret[key]["tags"].push(tag.name));
-      })
-    );
-    return res.json(ret);
+        const parsedTags = tags.map(tag => tag.name);
+        const parsedTool = tool.dataValues;
+        parsedTool.tags = parsedTags;
+        ret.push(parsedTool); 
+      });
+
+      return res.json(ret);
+    } catch(err) {
+      return res
+        .status(500)
+        .json({ message: err.message });      
+    }
+    
   }
 
   async delete(req, res) {
     const id = req.params.id;
-    const record = await Tools.destroy({ where: { id } });
+    const record = await Tool.destroy({ where: { id } });
 
     if (!record) {
       return res
