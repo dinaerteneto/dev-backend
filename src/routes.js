@@ -1,6 +1,10 @@
 const routes = require('express').Router();
 
+const DefaultController = require("./app/controllers/DefaultController");
 const ToolController = require("./app/controllers/ToolController");
+
+
+routes.get('/', DefaultController.index);
 
 /**
  * @swagger
