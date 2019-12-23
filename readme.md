@@ -59,7 +59,7 @@
 ## Como executar sem o docker
 
     - 1. Faça o clone/download deste repositório.
-    - 2. Navegue até o primeiro diretório App `cd dev-backend/app`.
+    - 2. Navegue até o diretório do projeto: `cd dev-backend`.
     - 3. Execute o comando `yarn install`.
     - 4. Com o postgres rodando ajuste o arquivo .env com seu usuário e banco do postgres que irá utilizar.
     - 5. Execute o comando `npx sequelize-cli db:migrate`.
