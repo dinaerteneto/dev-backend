@@ -1,5 +1,5 @@
 # CHALLANGE DEV BACKEND
-    Este repositório foi construído para atender o desafio de backend da `BOSSABOX`.
+    Este é o rota para acessar no heroku: `https://pacific-lowlands-67872.herokuapp.com/`
 
 ## Desafio
     Construir uma API e banco de dados para a aplicação VUTTR (Very Useful Tools to Remember).
