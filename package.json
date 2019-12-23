@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "dev-backend-nodejs",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,10 +7,6 @@
     "start": "yarn install && npx sequelize-cli db:migrate && node src/server.js",
     "dev": "nodemon src/server.js --ignore __tests__",
     "test": "jest"
-  },
-  "engines": {
-    "node": "13.2.0",
-    "yarn": "1.19.2"
   },
   "devDependencies": {
     "jest": "^24.9.0",
