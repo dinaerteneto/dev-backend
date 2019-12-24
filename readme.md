@@ -11,6 +11,21 @@
     - README.md contendo informações básicas do projeto e como executá-lo;
     - [API Blueprint](https://apiblueprint.org/) ou [Swagger](https://swagger.io/docs/specification/basic-structure/) da aplicação.
 
+
+## Bônus
+
+Os seguintes itens não são obrigatórios, mas darão mais valor ao seu trabalho (os em negrito são mais significativos para nós, se destacando como características para se tornar **Tech Lead** em squads)
+
+- Uso de ferramentas externas que facilitem o seu trabalho;
+- Cuidados especiais com otimização, padrões, entre outros;
+- Migrations ou script para configuração do banco de dados utilizado;
+- **Testes**;
+- **Conteinerização da aplicação**;
+- **Autenticação e autorização** (**OAuth, JWT**);
+- **Pipelines de CI/CD (GitLab, CircleCI, TravisCI, etc);**
+- **Deploy em ambientes reais, utilizando serviços de cloud externos (AWS, Heroku, GCP, etc);**
+- Sugestões sobre o challenge embasadas em alguma argumentação.    
+
 ## Critérios de Aceitação
 
     - A API deve ser real e escrita por você. Ferramentas que criam APIs automaticamente (Loopback, json-server, etc) não são aceitas;
